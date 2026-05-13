@@ -1,105 +1,89 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-
-interface ServiceItem {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  category: string;
-  image: string;
-}
+import {
+  Component,
+  signal,
+  computed,
+  OnInit,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Service } from './models/service.model';
+import { SERVICES, CATEGORIES } from './data/services.data';
+import { ServiceDialogComponent } from './components/service-dialog/service-dialog.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ServiceDialogComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
 })
-export class App {
-  readonly whatsAppNumber = '201011933492';
-  readonly categories = signal([
-    'الكل',
-    'الديكور',
-    'الرخام',
-    'الحجر',
-    'السيراميك',
-    'الإضاءة',
-    'الجبس',
-  ]);
-  readonly selectedCategory = signal('الكل');
+export class AppComponent implements AfterViewInit {
+  // ── Signals ──────────────────────────────────────────────
+  searchTerm = signal('');
+  selectedCategory = signal('الكل');
+  selectedService = signal<Service | null>(null);
+  showDialog = signal(false);
 
-  readonly services = signal<ServiceItem[]>([
-    {
-      id: 1,
-      title: 'تشطيب رخام داخلي وخارجي',
-      subtitle: 'أسطح، بدرومات، وجدران',
-      description:
-        'تركيب رخام عالي الجودة بتشطيبات ناعمة ودرجات ألوان متناسقة لتعطي لمسة فاخرة للمساحات.',
-      category: 'الرخام',
-      image:
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1100&q=80',
-    },
-    {
-      id: 2,
-      title: 'حجر طبيعي للواجهات والديكور',
-      subtitle: 'حجر خارجي وداخلي فاخر',
-      description: 'تصميم وتركيب الحجر الطبيعي لتجميل الواجهات والأركان وإبراز التفاصيل المعمارية.',
-      category: 'الحجر',
-      image:
-        'https://images.unsplash.com/photo-1600573473330-f5d96b5f2f96?auto=format&fit=crop&w=1100&q=80',
-    },
-    {
-      id: 3,
-      title: 'سيراميك وأرضيات مودرن',
-      subtitle: 'تصاميم معاصرة للمطابخ والصالونات',
-      description: 'نركب لك أفضل أنواع السيراميك بمقاسات وألوان تبرز جمال المساحة وتدوم لسنوات.',
-      category: 'السيراميك',
-      image:
-        'https://images.unsplash.com/photo-1549187774-b4e9ff70dbf4?auto=format&fit=crop&w=1100&q=80',
-    },
-    {
-      id: 4,
-      title: 'تصميم جبس بورد راقي',
-      subtitle: 'أسقف، فواصل، ونظام إضاءة مخفي',
-      description: 'تنفيذ جبس بورد مميز مع تفاصيل دقيقة وعملية لإضافة لمسة زخرفية جذابة.',
-      category: 'الجبس',
-      image:
-        'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1100&q=80',
-    },
-    {
-      id: 5,
-      title: 'إضاءات مخفية ومودرن',
-      subtitle: 'إضاءة جدارية وسقفية احترافية',
-      description: 'تركيب نظام إضاءة مخفي يعزز الفخامة ويضيف أجواء دافئة للمكان.',
-      category: 'الإضاءة',
-      image:
-        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1100&q=80',
-    },
-    {
-      id: 6,
-      title: 'تنفيذ ديكورات داخلية متكاملة',
-      subtitle: 'تصميم المساحات والتشطيب النهائي',
-      description: 'تصاميم ديكور داخلية مبتكرة وأنيقة تناسب الذوق العصري والراقي.',
-      category: 'الديكور',
-      image:
-        'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1100&q=80',
-    },
-  ]);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  readonly filteredServices = computed(() =>
-    this.selectedCategory() === 'الكل'
-      ? this.services()
-      : this.services().filter((item) => item.category === this.selectedCategory())
-  );
+  // ── Static data ──────────────────────────────────────────
+  categories = signal<string[]>(CATEGORIES);
 
-  setCategory(category: string): void {
-    this.selectedCategory.set(category);
+  // ── Derived ──────────────────────────────────────────────
+  filteredServices = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    const cat = this.selectedCategory();
+    return SERVICES.filter((s) => {
+      const catOk = cat === 'الكل' || s.category === cat;
+      const termOk =
+        !term ||
+        s.title.toLowerCase().includes(term) ||
+        s.category.toLowerCase().includes(term) ||
+        s.description.toLowerCase().includes(term);
+      return catOk && termOk;
+    });
+  });
+
+  // ── Handlers ─────────────────────────────────────────────
+  updateSearch(event: Event): void {
+    this.searchTerm.set((event.target as HTMLInputElement).value);
   }
 
-  getWhatsAppLink(service: ServiceItem): string {
-    const text = `السلام عليكم، أنا مهتم بخدمة ${service.title} - ${service.subtitle}. أريد معرفة الأسعار والتفاصيل.`;
-    return `https://wa.me/${this.whatsAppNumber}?text=${encodeURIComponent(text)}`;
+  setCategory(cat: string): void {
+    this.selectedCategory.set(cat);
+  }
+
+  openDetails(service: Service): void {
+    this.selectedService.set(service);
+    this.showDialog.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeDetails(): void {
+    this.showDialog.set(false);
+    this.selectedService.set(null);
+    document.body.style.overflow = '';
+  }
+
+  getWhatsAppLink(service: Service): string {
+    const msg = encodeURIComponent('أريد الاستفسار عن: ' + service.title);
+    return `https://wa.me/201011933492?text=${msg}`;
+  }
+
+  // ── Scroll animations ─────────────────────────────────────
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+          }),
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    }
   }
 }
