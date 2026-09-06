@@ -546,6 +546,29 @@ body {
   }
 }
 
+.service-seo-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  margin: -24px 0 32px;
+  color: var(--stone-light);
+  font-size: 12px;
+
+  a {
+    color: var(--gold-light);
+    text-decoration: underline;
+    text-decoration-color: rgba(232, 208, 152, 0.35);
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--warm-white);
+    }
+  }
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

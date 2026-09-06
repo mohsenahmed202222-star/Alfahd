@@ -1,0 +1,54 @@
+@if (page(); as landing) {
+<main class="service-page" dir="rtl">
+  <header class="service-header">
+    <a routerLink="/" class="service-brand"><span>الفهد</span> للتشطيبات والديكور</a>
+    <a routerLink="/" class="back-link">الرئيسية</a>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="مسار التنقل">
+    <a routerLink="/">الرئيسية</a><span aria-hidden="true">/</span
+    ><a routerLink="/">خدمات التشطيب</a><span aria-hidden="true">/</span
+    ><span>{{ landing.category }}</span>
+  </nav>
+
+  <section class="service-intro">
+    <p class="eyebrow">الفهد للتشطيبات والديكور</p>
+    <h1>{{ landing.title }}</h1>
+    <p>{{ landing.intro }}</p>
+    <a class="contact-cta" [href]="getWhatsAppLink()" target="_blank" rel="noreferrer">
+      اطلب معاينة وعرض سعر <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <section class="service-list" aria-labelledby="service-list-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">خدماتنا</p>
+        <h2 id="service-list-title">{{ landing.category }} من الفهد</h2>
+      </div>
+      <a routerLink="/" fragment="services">كل خدمات التشطيب</a>
+    </div>
+    <div class="service-grid">
+      @for (service of services(); track service.title) {
+      <article class="service-item">
+        <img [src]="service.image" [alt]="service.title" loading="lazy" />
+        <div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+
+  <footer class="service-footer">
+    <span>الفهد للتشطيبات والديكور</span>
+    <a href="https://wa.me/201200231818" target="_blank" rel="noreferrer">تواصل عبر واتساب</a>
+  </footer>
+</main>
+} @else {
+<main class="service-page" dir="rtl">
+  <h1>الخدمة غير متاحة</h1>
+  <a routerLink="/">العودة للرئيسية</a>
+</main>
+}

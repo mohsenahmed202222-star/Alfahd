@@ -4,5 +4,5 @@ export interface Service {
   subtitle: string;
   description: string;
   image: string;
-  images?: string[];
+  images: [string, string, string, string];
 }

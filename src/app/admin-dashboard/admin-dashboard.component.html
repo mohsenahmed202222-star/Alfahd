@@ -1,0 +1,137 @@
+<main class="admin-page" dir="rtl">
+  <header class="admin-topbar">
+    <a class="brand" href="/" aria-label="العودة إلى موقع الفهد">
+      <span class="brand-mark">الفهد</span>
+      <span><strong>الفهد</strong><small>إدارة الأعمال والصور</small></span>
+    </a>
+    <a class="site-link" href="/">العودة للموقع <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="dashboard-heading">
+    <div>
+      <p class="eyebrow">لوحة التحكم</p>
+      <h1>معرض الأعمال</h1>
+      <p class="heading-copy">أضف صور المشروعات لتظهر مباشرة في معرض الموقع.</p>
+    </div>
+    <div class="image-count">
+      <strong>{{ images().length }}</strong
+      ><span>صورة منشورة</span>
+    </div>
+  </section>
+
+  <section class="workspace">
+    <form class="upload-panel" (submit)="$event.preventDefault(); upload()">
+      <div class="panel-heading">
+        <div class="panel-icon" aria-hidden="true">＋</div>
+        <div>
+          <h2>إضافة صور</h2>
+          <p>اختر القسم وأضف حتى 8 صور في المرة الواحدة.</p>
+        </div>
+      </div>
+
+      <label class="field-label" for="admin-password">كلمة مرور الإدارة</label>
+      <input
+        id="admin-password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="كلمة المرور"
+        [value]="password()"
+        (input)="updateText('password', $event)"
+        required
+      />
+
+      <label class="field-label" for="image-title">عنوان الصور</label>
+      <input
+        id="image-title"
+        type="text"
+        placeholder="مثال: واجهة فيلا في القاهرة"
+        [value]="title()"
+        (input)="updateText('title', $event)"
+        required
+      />
+
+      <label class="field-label" for="image-category">القسم</label>
+      <select id="image-category" [value]="category()" (change)="updateCategory($event)">
+        @for (item of categories; track item) {
+        <option [value]="item">{{ item }}</option>
+        }
+      </select>
+
+      <label class="field-label" for="image-files">ملفات الصور</label>
+      <label class="file-picker" for="image-files">
+        <span class="upload-symbol" aria-hidden="true">↑</span>
+        <strong>اختر الصور من جهازك</strong>
+        <small>JPG أو PNG أو WebP، بحد أقصى 6 ميجابايت للصورة</small>
+      </label>
+      <input
+        class="file-input"
+        id="image-files"
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/avif"
+        multiple
+        (change)="selectFiles($event)"
+      />
+
+      @if (previews().length) {
+      <div class="preview-grid" aria-label="معاينة الصور المختارة">
+        @for (preview of previews(); track preview) {
+        <img [src]="preview" alt="معاينة صورة مختارة" />
+        }
+      </div>
+      } @if (message()) {
+      <p class="form-message" [class.error]="messageType() === 'error'" role="status">
+        {{ message() }}
+      </p>
+      }
+
+      <button class="submit-button" type="submit" [disabled]="busy()">
+        {{ busy() ? 'جارٍ رفع الصور...' : 'نشر الصور في الموقع' }}
+      </button>
+    </form>
+
+    <section class="published-panel" aria-labelledby="published-title">
+      <div class="published-heading">
+        <div>
+          <h2 id="published-title">الصور المنشورة</h2>
+          <p>تظهر هذه الصور في معرض الموقع العام.</p>
+        </div>
+        <button
+          class="refresh-button"
+          type="button"
+          (click)="loadImages()"
+          aria-label="تحديث الصور"
+        >
+          ↻
+        </button>
+      </div>
+
+      @if (images().length) {
+      <div class="published-grid">
+        @for (image of images(); track image.id) {
+        <article class="published-item">
+          <img [src]="image.url" [alt]="image.title" />
+          <div class="item-details">
+            <div>
+              <strong>{{ image.title }}</strong
+              ><span>{{ image.category }}</span>
+            </div>
+            <button
+              type="button"
+              (click)="deleteImage(image)"
+              [attr.aria-label]="'حذف ' + image.title"
+            >
+              حذف
+            </button>
+          </div>
+        </article>
+        }
+      </div>
+      } @else {
+      <div class="empty-state">
+        <span aria-hidden="true">▧</span>
+        <p>لا توجد صور مضافة حتى الآن.</p>
+      </div>
+      }
+    </section>
+  </section>
+</main>

@@ -2,6 +2,66 @@ import { Service } from '../models/service.model';
 
 export const SERVICES: Service[] = [
   {
+    category: 'قراميط البناء',
+    title: 'توريد وتركيب قراميط البناء',
+    subtitle: 'حلول عملية للأسطح والواجهات',
+    description:
+      'توريد وتركيب قراميط البناء بمقاسات وخامات متنوعة، مع تجهيز السطح وتنفيذ مضبوط يناسب طبيعة كل مشروع.',
+    image:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+    images: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85',
+    ],
+  },
+  {
+    category: 'دهانات',
+    title: 'أعمال الدهانات الداخلية والخارجية',
+    subtitle: 'تشطيب متقن وألوان تناسب مساحتك',
+    description:
+      'تجهيز الأسطح وتنفيذ الدهانات الداخلية والخارجية والتأثيرات الديكورية بخامات مناسبة وتشطيب نظيف.',
+    image:
+      'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=900&q=85',
+    images: [
+      'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85',
+    ],
+  },
+  {
+    category: 'سيراميك',
+    title: 'تركيب السيراميك والبورسلين',
+    subtitle: 'أرضيات وحوائط بتركيب دقيق',
+    description:
+      'تركيب السيراميك والبورسلين للأرضيات والحوائط مع ضبط المناسيب والفواصل والتشطيب حول الزوايا.',
+    image:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85',
+    images: [
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85',
+    ],
+  },
+  {
+    category: 'ألوميتال',
+    title: 'أعمال الألوميتال والزجاج',
+    subtitle: 'شبابيك وأبواب وواجهات بمقاسات دقيقة',
+    description:
+      'تصميم وتوريد وتركيب شبابيك وأبواب الألوميتال والواجهات الزجاجية، مع اختيار القطاعات والإكسسوارات المناسبة للمكان.',
+    image:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+    images: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85',
+    ],
+  },
+  {
     category: 'رخام',
     title: 'أرضيات الرخام الطبيعي',
     subtitle: 'رخام إيطالي ومصري بأعلى جودة',
@@ -40,8 +100,7 @@ export const SERVICES: Service[] = [
       '/img/c2052b3d632a372715e981e6f94cb825.jpg',
       '/img/Calacatta_Marble_kitchen.jpg',
       '/img/image3_modern-marble-bathroom-ideas_go-large-with-marble-tiles.jpg',
-       '/img/b77394666fd607f882362f53cdcfb319.png',
-    
+      '/img/b77394666fd607f882362f53cdcfb319.png',
     ],
   },
   {
@@ -50,10 +109,9 @@ export const SERVICES: Service[] = [
     subtitle: 'حجر مصري وبلدي بأساليب عصرية',
     description:
       'تركيب حجر طبيعي مصري وبلدي على الواجهات الخارجية بأساليب تقليدية وعصرية تعطي طابعاً فريداً لكل مشروع.',
-    image:
-       '/img/c14cde731fb2415228d9425c757922a6.jpg',
+    image: '/img/c14cde731fb2415228d9425c757922a6.jpg',
     images: [
-     '/img/c14cde731fb2415228d9425c757922a6.jpg',
+      '/img/c14cde731fb2415228d9425c757922a6.jpg',
       '/img/exterior-1.jpg',
       '/img/limestone-house-facade-and-tree.jpg',
       '/img/Building-in-Limestone-7.jpg',
@@ -65,8 +123,7 @@ export const SERVICES: Service[] = [
     subtitle: 'أشكال وأنماط متنوعة للداخل والخارج',
     description:
       'تنفيذ جدران حجر داخلية وخارجية بأشكال وأنماط متنوعة تضفي جمالاً وفخامة على المساحة.',
-    image:
-       '/img/a3d683ba0b3a5d73412bf995890c140e.jpg',
+    image: '/img/a3d683ba0b3a5d73412bf995890c140e.jpg',
     images: [
       '/img/ee410a33dbf02004b877064721c4429d.jpg',
       '/img/RusticInteriorStoneWallCladding.jpg',
@@ -80,13 +137,12 @@ export const SERVICES: Service[] = [
     subtitle: 'رخام وخشب ومعدن في تناغم عصري',
     description:
       'تصميم وتنفيذ ديكورات داخلية شاملة تجمع بين الرخام والخشب والمعدن في تناغم عصري راقٍ.',
-    image:
-        '/img/8ca29c005d7086fb578db30fc416d9bb.jpg',
+    image: '/img/8ca29c005d7086fb578db30fc416d9bb.jpg',
     images: [
       '/img/4f95221c1060a2d9cf0d92d2f4e474d1.jpg',
       '/img/interiorstoneaccentwallsstoneseleximga4e1fb1004cc43b4915301e1d6ce5.jpg',
       '/img/globependantlights1.jpg',
-     '/img/c21f2317631113964c27178ecdbf.jpg',
+      '/img/c21f2317631113964c27178ecdbf.jpg',
     ],
   },
   {
@@ -95,8 +151,7 @@ export const SERVICES: Service[] = [
     subtitle: 'جبس بورد مع إضاءات مدمجة',
     description:
       'تنفيذ أسقف جبس بورد مستعارة وجدران درايوول بتشكيلات وإضاءات مدمجة لإضفاء عمق وفخامة للمساحة.',
-    image:
-      '/img/571638700275402443011.jpg',
+    image: '/img/571638700275402443011.jpg',
     images: [
       '/img/866638699501603711364.jpg',
       '/img/fa9f2e95811c63e32990065a939889db.png',
@@ -110,8 +165,7 @@ export const SERVICES: Service[] = [
     subtitle: 'تحكم كامل في الألوان والشدة',
     description:
       'تصميم وتنفيذ منظومات الإضاءة الذكية والديكورية مع تحكم كامل في الألوان والشدة وبرمجة مشاهد جاهزة.',
-    image:
-        '/img/c2f2ac150d226e024e40e5f5c9c68af0compress.jpg',
+    image: '/img/c2f2ac150d226e024e40e5f5c9c68af0compress.jpg',
     images: [
       '/img/image2721.png',
       '/img/RGBTopCeilingLivingRoom.png',
@@ -125,8 +179,7 @@ export const SERVICES: Service[] = [
     subtitle: 'وفق الكودات المصرية مع ضمان السلامة',
     description:
       'تأسيس وتوصيل كهربائي كامل للمباني التجارية والسكنية وفق الكودات المصرية مع ضمان السلامة والجودة.',
-    image:
-      '/img/careerbuilder-original-3580.jpg',
+    image: '/img/careerbuilder-original-3580.jpg',
     images: [
       '/img/experienced-electrician-doing-electrical-work-high-precision-neatness-127279072.jpg',
       '/img/electrician-3-1.jpg',
@@ -136,4 +189,14 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const CATEGORIES = ['الكل', 'رخام', 'حجر', 'ديكور', 'كهرباء'];
+export const CATEGORIES = [
+  'الكل',
+  'حجر',
+  'رخام',
+  'قراميط البناء',
+  'دهانات',
+  'سيراميك',
+  'ألوميتال',
+  'ديكور',
+  'كهرباء',
+];
