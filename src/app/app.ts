@@ -71,7 +71,7 @@ export class AppComponent implements AfterViewInit {
 
   getWhatsAppLink(service: Service): string {
     const msg = encodeURIComponent('أريد الاستفسار عن: ' + service.title);
-    return `https://wa.me/201011933492?text=${msg}`;
+    return `https://wa.me/201200231818?text=${msg}`;
   }
 
   toggleMenu(): void {

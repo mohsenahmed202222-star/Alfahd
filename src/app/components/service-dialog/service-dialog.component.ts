@@ -63,7 +63,9 @@ import { Service } from '../../models/service.model';
         max-width: 620px;
         width: min(100%, 620px);
         max-height: 88vh;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
       }
       .dialog-gallery {
         background: rgba(255, 255, 255, 0.02);
@@ -226,7 +228,7 @@ export class ServiceDialogComponent {
 
   getWhatsAppLink(): string {
     const msg = encodeURIComponent('أريد الاستفسار عن: ' + this.service.title);
-    return `https://wa.me/201011933492?text=${msg}`;
+    return `https://wa.me/201200231818?text=${msg}`;
   }
 
   onOverlayClick(event: MouseEvent): void {
